@@ -61,7 +61,7 @@ void replaceLabels(Script * script) {
 				buf[k] = '\0';
 				uint64_t address = getintAddress(buf, script->ltable);
 				char str[20];
-				sprintf(str, "%llu", address);
+				sprintf(str, "%" PRIu64, address);
 				for (int m = 0; m < strlen(str); m++)
 					modified[len++] = str[m];
 				j = k-1;
