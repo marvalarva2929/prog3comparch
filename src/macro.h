@@ -23,7 +23,7 @@ int expandOut(Entry * original, Entry * output);
 
 // ld rd, L -> multiple instructions to build 64-bit value
 // NOTE: L should be the resolved address (label already looked up)
-int expandLd(Entry * original, Entry * output, int address);
+int expandLd(Entry * original, Entry * output, uint64_t address);
 
 // push rd -> subi r31, 8; mov (r31)(0), rd
 int expandPush(Entry * original, Entry * output);

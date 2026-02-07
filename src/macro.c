@@ -91,7 +91,7 @@ int expandOut(Entry * original, Entry * output) {
 }
 
 // ld rd, L -> Expands to multiple instructions to load full 64-bit value
-int expandLd(Entry * original, Entry * output, int address) {
+int expandLd(Entry * original, Entry * output, uint64_t address) {
     // Parse register from args (format: "r5, :label" or "r5, 0x1000")
     char * argsCopy = strdup(original->str);
     char * reg = strtok(argsCopy, ",");
