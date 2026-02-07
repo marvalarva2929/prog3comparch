@@ -91,8 +91,9 @@ int expandOut(Entry * original, Entry * output) {
 }
 
 // ld rd, L -> Expands to multiple instructions to load full 64-bit value
-int expandLd(Entry * original, Entry * output, uint64_t address) {
-    // Parse register from args (format: "r5, :label" or "r5, 0x1000")
+int expandLd(Entry * original, Entry * output, uint64_t addr) {
+	    fprintf(stderr, "DEBUG expandLd: address=%llu (0x%llu)\n", addr, addr);
+// Parse register from args (format: "r5, :label" or "r5, 0x1000")
     char * argsCopy = strdup(original->str);
     char * reg = strtok(argsCopy, ",");
     int rd = parseRegister(reg);
@@ -107,9 +108,8 @@ int expandLd(Entry * original, Entry * output, uint64_t address) {
     count++;
     
     // Extract 12-bit chunks from MSB to LSB
-    unsigned long long addr = (unsigned long long)address;
     
-    int chunks[6];
+    uint64_t chunks[6];
     chunks[0] = (addr >> 52) & 0xFFF;  // Bits 52-63
     chunks[1] = (addr >> 40) & 0xFFF;  // Bits 40-51
     chunks[2] = (addr >> 28) & 0xFFF;  // Bits 28-39
@@ -121,12 +121,12 @@ int expandLd(Entry * original, Entry * output, uint64_t address) {
     for (int i = 0; i < 6; i++) {
         if (i == 5) {
             // Last 4 bits
-			snprintf(instruction, sizeof(instruction), "addi r%d, %d", rd, chunks[i]);
+			snprintf(instruction, sizeof(instruction), "addi r%d, %llu", rd, chunks[i]);
 			output[count] = createExpandedEntry(original, instruction, 0);
 			count++;
         } else {
             // 12-bit chunks
-			snprintf(instruction, sizeof(instruction), "addi r%d, %d", rd, chunks[i]);
+			snprintf(instruction, sizeof(instruction), "addi r%d, %llu", rd, chunks[i]);
 			output[count] = createExpandedEntry(original, instruction, 0);
 			count++;
 			snprintf(instruction, sizeof(instruction), "shftli r%d, %d", rd, (i == 4) ? 4 : 12);
