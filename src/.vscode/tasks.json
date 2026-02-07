@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [ //hw3 main.c parse.c argparse.c labletable.c macro.c encode.c
+		{
+			"label": "Build C Program",
+			"type": "shell",
+			"command": "gcc",
+			"args": [
+				"-g",
+				"-o",
+				"${workspaceFolder}/a.out",
+				"${workspaceFolder}/main.c",
+				"${workspaceFolder}/parse.c",
+				"${workspaceFolder}/argparse.c",
+				"${workspaceFolder}/labletable.c",
+				"${workspaceFolder}/macro.c",
+				"${workspaceFolder}/encode.c",
+
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": ["$gcc"]
+		}
+	]
+}
