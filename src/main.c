@@ -31,7 +31,7 @@ void expandMacros(Script * script) {
 }
 
 void fillLabelTable(Script * script) {
-	int address = 0x1000;
+	uint64_t address = 0x1000;
 	for (int i = 0; i < script->numEntries; i++) {
 		if (script->entries[i].type != 2) script->entries[i].address = address;
 		if (script->entries[i].type == 2) {

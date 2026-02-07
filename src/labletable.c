@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void insertLabel(char * label, int address, ltable *table) {
+void insertLabel(char * label, uint64_t address, ltable *table) {
     if (table->count >= MAX_LABELS) {
         fprintf(stderr, "Error: Too many labels!\n");
         exit(1);

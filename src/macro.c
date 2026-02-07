@@ -121,12 +121,12 @@ int expandLd(Entry * original, Entry * output, uint64_t addr) {
     for (int i = 0; i < 6; i++) {
         if (i == 5) {
             // Last 4 bits
-			snprintf(instruction, sizeof(instruction), "addi r%d, %llu", rd, chunks[i]);
+			snprintf(instruction, sizeof(instruction), "addi r%d, %" PRIu64, rd, chunks[i]);
 			output[count] = createExpandedEntry(original, instruction, 0);
 			count++;
         } else {
             // 12-bit chunks
-			snprintf(instruction, sizeof(instruction), "addi r%d, %llu", rd, chunks[i]);
+			snprintf(instruction, sizeof(instruction), "addi r%d, %" PRIu64, rd, chunks[i]);
 			output[count] = createExpandedEntry(original, instruction, 0);
 			count++;
 			snprintf(instruction, sizeof(instruction), "shftli r%d, %d", rd, (i == 4) ? 4 : 12);

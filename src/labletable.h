@@ -11,6 +11,6 @@ typedef struct ltable {
 } ltable;
 
 uint64_t getintAddress(char * label, ltable *table);
-void insertLabel(char * label, int address, ltable *table);
+void insertLabel(char * label, uint64_t address, ltable *table);
 
 
