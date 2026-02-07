@@ -1,5 +1,3 @@
 :L0
 .code
-	add r1, r2, r3
-	sub r5, r10, r15
 	ld r1, :L0

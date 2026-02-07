@@ -51,6 +51,7 @@ void replaceLabels(Script * script) {
 		Entry * entry = &script->entries[i];
 		char * modified = malloc(50000 * sizeof(char));
 		int len = 0;
+		printf("%s %s\n", entry->cmd.type, entry->str);
 		if (entry->str == null) continue;
 		for (int j = 0; j < strlen(entry->str); j++)
 			if (entry->str[j] == ':') {
@@ -140,16 +141,15 @@ void printToBinary(Script * script, char * filename) {
 
 int main(int argc, char * argv[]) {
 	Script * script = getScript(argv[1]);
-	
+	for (int i = 0; i < script->numEntries; i++) {
+		Entry entry = script->entries[i];
+		printf("%s %s\n", entry.type, entry.str ? entry.str : "none");
+	}
 	// 1: Intermediate file created
 	fillLabelTable(script);
 
-	for (int i = 0; i < script->numEntries; i++) {
-		Entry entry = script->entries[i];
 
-
-	}
-	expandMacros(script);
+	//expandMacros(script);
 
 	replaceLabels(script);
 
